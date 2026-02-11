@@ -158,3 +158,11 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
+
+# CSRF Configuration for GitHub Codespaces
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000']
+if CODESPACE_NAME:
+    CSRF_TRUSTED_ORIGINS.append(f"https://{CODESPACE_NAME}-8000.app.github.dev")
+
+# Secure proxy SSL header for HTTPS detection behind GitHub proxy
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
